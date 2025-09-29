@@ -21,10 +21,10 @@ Autenticação & Hospedagem: Firebase
 
 ✨ Funcionalidades
 
-✅ Cadastro e gerenciamento de pacientes
-✅ Agenda de consultas com visualização por dia/semana/mês
-✅ Registro de tratamentos realizados
-✅ Controle financeiro (pagamentos, pendências e relatórios)
-✅ Painel administrativo com estatísticas
-✅ Login seguro com autenticação (Firebase Auth)
-✅ Interface moderna e responsiva (TailwindCSS + Angular)
++ ✅ Cadastro e gerenciamento de pacientes
++ ✅ Agenda de consultas com visualização por dia/semana/mês
++ ✅ Registro de tratamentos realizados
++ ✅ Controle financeiro (pagamentos, pendências e relatórios)
++ ✅ Painel administrativo com estatísticas
++ ✅ Login seguro com autenticação (Firebase Auth)
++ ✅ Interface moderna e responsiva (TailwindCSS + Angular)
