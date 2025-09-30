@@ -1,0 +1,44 @@
+<nav
+  class="w-full bg-blue-400 dark:bg-black py-5 text-white top-0 sticky z-100"
+>
+  <div class="max-w-7xl mx-auto grid grid-cols-3 place-items-center">
+    <img
+      src="logo.png"
+      class="w-30 cursor-pointer"
+      alt="Odonto Easy Logo"
+      routerLink="/home"
+    />
+    <div class="flex flex-row gap-15 font-bold text-lg">
+      <a
+        class="hover:transition-transform transform hover:scale-110"
+        routerLink="/home"
+        routerLinkActive="active"
+        >Início</a
+      >
+      <a
+        class="hover:transition-transform transform hover:scale-110"
+        routerLink="/about"
+        routerLinkActive="active"
+        >Sobre</a
+      >
+      <a
+        class="hover:transition-transform transform hover:scale-110"
+        routerLink="/plans"
+        routerLinkActive="active"
+        >Planos</a
+      >
+    </div>
+    <div class="flex flex-row gap-3">
+      <button
+        class="cursor-pointer rounded-md text-blue-900 font-bold bg-white p-3 hover:bg-gray-200 shadow-md"
+      >
+        Entrar
+      </button>
+      <button
+        class="bg-blue-400 dark:bg-blue-900 rounded-md p-3 flex flex-row gap-2 cursor-pointer shadow-md font-medium"
+      >
+        Tire suas dúvidas <img src="whatsapp.png" class="w-8" alt="Whatsapp" />
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,6 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{html,js}"],
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        montserrat: ["Montserrat"],
+        lato: ["Lato"],
+        garamond: ["Garamond"],
+      },
+    },
+  },
   plugins: [],
 };
