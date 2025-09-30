@@ -4,7 +4,7 @@
   <div
     class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
   >
-    <div class="flex justify-center">
+    <div class="flex justify-center" [@fadeInLeftBigOnEnter]>
       <img
         src="odontoeasy-home.png"
         alt="Gestão de clínicas odontológicas"
@@ -12,7 +12,7 @@
       />
     </div>
 
-    <div class="text-center md:text-left">
+    <div class="text-center md:text-left" [@fadeInRightBigOnEnter]>
       <h1
         class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
       >
@@ -254,5 +254,59 @@
       <span class="text-blue-500">grátis</span>
       por 15 dias!
     </h2>
+    <div class="mt-15 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2">
+      <div
+        class="place-self-center max-w-md mx-auto mb-5 md:mb-0 md:mx-0 text-center md:text-left"
+      >
+        <h2
+          class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white"
+        >
+          Transforme a gestão da sua clínica odontológica 🥇
+        </h2>
+        <p class="mt-3 text-gray-600 dark:text-gray-300">
+          Com o <strong>OdontoEasy</strong> você controla pacientes, agenda e
+          finanças em um só lugar.
+        </p>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">
+          Experimente grátis e descubra como é fácil dar o próximo passo para
+          modernizar sua clínica — sem cartão de crédito.
+        </p>
+      </div>
+
+      <div
+        class="mat-elevation-z8 shadow-md flex flex-col gap-2 p-5 rounded-md bg-white text-black dark:bg-gray-800 dark:text-white"
+        [formGroup]="form"
+      >
+        <mat-form-field class="w-full">
+          <mat-label>Nome</mat-label>
+          <input matInput [formControlName]="'name'" />
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>E-mail</mat-label>
+          <input
+            matInput
+            [formControlName]="'email'"
+            placeholder="seuemail@outlook.com"
+          />
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Celular/Telefone</mat-label>
+          <input matInput [formControlName]="'phone'" />
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Empresa</mat-label>
+          <input matInput [formControlName]="'company'" />
+          <mat-icon matPrefix>business</mat-icon>
+        </mat-form-field>
+        <button
+          class="cursor-pointer rounded-md p-4 bg-green-600 text-white font-bold"
+        >
+          Testar grátis
+        </button>
+      </div>
+    </div>
   </div>
 </section>
