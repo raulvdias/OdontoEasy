@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -22,6 +23,7 @@ import {
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
+    NgOptimizedImage,
   ],
   animations: [
     fadeInRightBigOnEnterAnimation({ translate: '250px', duration: 1500 }),

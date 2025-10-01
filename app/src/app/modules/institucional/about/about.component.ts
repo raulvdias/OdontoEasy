@@ -1,9 +1,10 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { fadeInUpBigOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
   animations: [
