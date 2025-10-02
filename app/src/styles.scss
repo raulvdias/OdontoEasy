@@ -18,3 +18,11 @@ body {
     @include mat.elevation($i);
   }
 }
+
+//No scroll Mobile
+.no-scroll {
+  width: 100% !important;
+  height: 100dvh !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
