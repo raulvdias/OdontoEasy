@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PlansComponent } from './plans/plans.component';
 import { InstitucionalComponent } from './institucional.component';
+import { PaymentComponent } from './payment/payment.component';
 
 export default [
   {
@@ -25,6 +26,10 @@ export default [
       {
         path: 'plans',
         component: PlansComponent,
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent,
       },
     ],
   },
