@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { PaymentService } from './payment.service';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-payment',
@@ -7,19 +9,16 @@ import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
   templateUrl: './payment.component.html',
 })
 export class PaymentComponent implements OnInit {
-  constructor() {}
+  private key = environment.stripeKey;
+  constructor(private _stripeService: PaymentService) {}
 
-  async ngOnInit(): Promise<void> {
-    var stripe = await loadStripe(
-      'pk_test_51SE88WE2NTSMdUqTVNNNwbdgoumJjWFncPIS6Ar2GsIsAO3nHUClXY4OUksnRLpfvYKPCmlLNHF4HCjjAuK61F7u00w4cCc9mo'
-    );
-    const options: StripeElementsOptions = {
-      mode: 'payment',
-      currency: 'usd',
-      amount: 1099,
-    };
-    const elements = stripe?.elements(options);
-    const checkout = elements?.create('expressCheckout');
-    checkout?.mount('#checkout');
+  ngOnInit() {
+    this._stripeService.createSession().then(async (client: any) => {
+      let stripe = await loadStripe(this.key);
+      const checkout = await stripe?.initEmbeddedCheckout({
+        clientSecret: client,
+      });
+      checkout?.mount('#checkout');
+    });
   }
 }
