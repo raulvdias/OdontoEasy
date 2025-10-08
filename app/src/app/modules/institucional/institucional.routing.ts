@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { PlansComponent } from './plans/plans.component';
 import { InstitucionalComponent } from './institucional.component';
 import { PaymentComponent } from './payment/payment.component';
+import { LoginComponent } from './login/login.component';
 
 export default [
   {
@@ -30,6 +31,10 @@ export default [
       {
         path: 'payment',
         component: PaymentComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
       },
     ],
   },
