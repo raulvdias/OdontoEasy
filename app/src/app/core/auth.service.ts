@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, from, lastValueFrom, Observable } from 'rxjs';
-import { environment } from '../../../environment';
+import { environment } from '../environment';
 import { inject, Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 

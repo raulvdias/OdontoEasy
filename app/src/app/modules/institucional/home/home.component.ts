@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 import {
   fadeInRightBigOnEnterAnimation,
   fadeInLeftBigOnEnterAnimation,
+  fadeInUpBigOnEnterAnimation,
 } from 'angular-animations';
 
 @Component({
@@ -28,6 +29,7 @@ import {
   animations: [
     fadeInRightBigOnEnterAnimation({ translate: '250px', duration: 1500 }),
     fadeInLeftBigOnEnterAnimation({ translate: '250px', duration: 1500 }),
+    fadeInUpBigOnEnterAnimation({ translate: '150px' }),
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

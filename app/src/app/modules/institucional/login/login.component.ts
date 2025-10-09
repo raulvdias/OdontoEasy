@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../../core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.formLogin.getRawValue();
     this._loginService.loginUser(email, password).subscribe((response: any) => {
       if (response.status != 'ERROR') {
-        console.log('Ok');
+        console.log(response);
       }
       return null;
     });
