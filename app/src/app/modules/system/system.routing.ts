@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { SystemComponent } from './system.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export default [
   {
@@ -10,6 +11,11 @@ export default [
   {
     path: '',
     component: SystemComponent,
-    children: [],
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+    ],
   },
 ] as Routes;

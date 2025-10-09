@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
   isLoading: Boolean = false;
   constructor(
     private _formBuilder: FormBuilder,
-    private _loginService: AuthService
+    private _loginService: AuthService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.formLogin.getRawValue();
     this._loginService.loginUser(email, password).subscribe((response: any) => {
       if (response.status != 'ERROR') {
-        console.log(response);
+        this._router.navigateByUrl('/system');
       }
       return null;
     });

@@ -1,3 +1,32 @@
-<!-- NavBar -->
-<router-outlet></router-outlet>
-<!-- Footer -->
+<mat-sidenav-container
+  (backdropClick)="toggleSidenav()"
+  class="h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+>
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile || sidenavOpened"
+    class="max-w-80 bg-gray-200 dark:bg-black p-0"
+  >
+    <app-nav-system></app-nav-system>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="flex flex-col h-screen">
+    <header
+      class="flex items-center justify-between p-4 bg-gray-200 dark:bg-black sticky top-0 z-50 shadow-sm"
+    >
+      <button
+        (click)="toggleSidenav()"
+        class="lg:hidden bg-gray-300 dark:bg-gray-700 p-2 rounded-md"
+      >
+        <mat-icon *ngIf="!sidenavOpened">menu</mat-icon>
+        <mat-icon *ngIf="sidenavOpened">close</mat-icon>
+      </button>
+      <h1 class="text-lg font-semibold dark:text-white">Painel</h1>
+    </header>
+
+    <main class="flex-1">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

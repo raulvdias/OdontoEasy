@@ -16,7 +16,8 @@ export const routes: Routes = [
       },
     ],
   },
-  //   {
-  //     path: 'system',
-  //   },
+  {
+    path: 'system',
+    loadChildren: () => import('./modules/system/system.routing'),
+  },
 ];
