@@ -22,7 +22,7 @@ export class SystemComponent implements OnInit {
 
   @HostListener('window:resize')
   checkScreenSize() {
-    this.isMobile = window.innerWidth < 1024; // breakpoint lg
+    this.isMobile = window.innerWidth < 1000;
     this.sidenavOpened = !this.isMobile;
   }
 
