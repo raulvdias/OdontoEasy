@@ -1,0 +1,182 @@
+<div class="inset-0 flex flex-col h-full">
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b-2 border-b-gray-300"
+  >
+    <!-- Title -->
+    <div class="flex-1 min-w-0">
+      <h2
+        class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+      >
+        {{ board.title }}
+      </h2>
+    </div>
+    <!-- Actions -->
+    <div class="font-medium flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+      <button
+        mat-stroked-button
+        class="p-4 !bg-blue-200 !rounded-lg !border-0"
+        [routerLink]="['..']"
+      >
+        <mat-icon class="icon-size-5">view_columns</mat-icon>
+        <span class="ml-2">Boards</span>
+      </button>
+      <button
+        class="ml-3 p-4 !bg-blue-200 !rounded-lg !border-0"
+        mat-stroked-button
+      >
+        <mat-icon class="icon-size-5">settings</mat-icon>
+        <span class="ml-2">Configurações</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div
+    class="min-h-screen min-w-0 flex-auto p-6 sm:p-8 sm:pt-4 bg-slate-200 overflow-y-auto"
+    cdkScrollable
+  >
+    <!-- Lists -->
+    <div
+      class="flex"
+      cdkDropList
+      [cdkDropListData]="board.lists"
+      [cdkDropListOrientation]="'horizontal'"
+      (cdkDropListDropped)="listDropped($event)"
+    >
+      <!-- Group all cdkDropList's after this point together so that the cards can be transferred between lists -->
+      <div class="flex gap-5 items-start" cdkDropListGroup>
+        <!-- List -->
+        <ng-container *ngFor="let list of board.lists; trackBy: trackByFn">
+          <div
+            class="flex-0 w-72 p-3 rounded-2xl"
+            cdkDrag
+            [cdkDragLockAxis]="'x'"
+          >
+            <div class="flex items-center justify-between" cdkDragHandle>
+              <div
+                class="flex items-center w-full py-2 px-3 rounded-md cursor-text border border-transparent focus-within:bg-white focus-within:shadow-sm focus-within:border-primary dark:focus-within:bg-gray-900"
+              >
+                <input
+                  class="w-full font-medium leading-5 bg-transparent outline-none"
+                  [spellcheck]="'false'"
+                  [value]="list.title"
+                  (focusout)="updateListTitle($event, list)"
+                  (keydown.enter)="listTitleInput.blur()"
+                  #listTitleInput
+                />
+              </div>
+              <div
+                class="flex items-center justify-center min-w-6 ml-4 text-sm font-semibold leading-6 rounded-full bg-gray-300 text-secondary dark:bg-white"
+              >
+                {{ list.cards.length }}
+              </div>
+              <div class="ml-1">
+                <button
+                  class="w-8 h-8 min-h-8"
+                  mat-icon-button
+                  [matMenuTriggerFor]="listMenu"
+                >
+                  <mat-icon class="icon-size-5">more_vert</mat-icon>
+                </button>
+                <mat-menu #listMenu="matMenu" class="!bg-white">
+                  <button mat-menu-item (click)="renameList(listTitleInput)">
+                    <mat-icon class="icon-size-5">edit</mat-icon>
+                    Renomear lista
+                  </button>
+                  <button mat-menu-item (click)="deleteList(list.id)">
+                    <mat-icon class="icon-size-5">delete</mat-icon>
+                    Excluir lista
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+
+            <!-- Cards -->
+            <div class="mt-2 rounded-xl bg-slate-300 min-w-64">
+              <div
+                [id]="list.id || ''"
+                class="p-3 pb-0"
+                cdkDropList
+                [cdkDropListData]="list.cards"
+                (cdkDropListDropped)="cardDropped($event)"
+              >
+                <!-- Card -->
+                <ng-container
+                  *ngFor="let card of list.cards; trackBy: trackByFn"
+                >
+                  <a
+                    class="flex flex-col items-start mb-3 p-5 space-y-3 shadow rounded-lg overflow-hidden bg-white"
+                    [routerLink]="['card', card.id]"
+                    cdkDrag
+                  >
+                    <!-- Title -->
+                    <div class="text-md font-medium leading-5">
+                      {{ card.title }}
+                    </div>
+                    <!-- Labels -->
+                    <ng-container *ngIf="card.labels.length">
+                      <div>
+                        <div class="flex flex-wrap -mx-1 -mb-2">
+                          <ng-container
+                            *ngFor="
+                              let label of card.labels;
+                              trackBy: trackByFn
+                            "
+                          >
+                            <div
+                              class="mx-1 mb-2 py-0.5 px-3 rounded-full text-sm font-medium text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700"
+                            >
+                              {{ label.title }}
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <!-- Due date -->
+                    <ng-container *ngIf="card.dueDate">
+                      <div
+                        class="flex items-center rounded text-sm font-medium leading-5 text-secondary"
+                        [ngClass]="{ 'text-red-600': isOverdue(card.dueDate) }"
+                      >
+                        <mat-icon class="icon-size-4 text-current"
+                          >schedule</mat-icon
+                        >
+                        <div class="ml-1">
+                          {{ card.dueDate | date : "longDate" }}
+                        </div>
+                      </div>
+                    </ng-container>
+                  </a>
+                </ng-container>
+              </div>
+
+              <!-- New card -->
+              <scrumboard-board-add-card
+                (saved)="addCard(list, $event)"
+                [buttonTitle]="
+                  list.cards.length ? 'Adicionar outro card' : 'Adicionar card'
+                "
+              >
+              </scrumboard-board-add-card>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- New list -->
+        <scrumboard-board-add-list
+          (saved)="addList($event)"
+          [buttonTitle]="
+            board.lists.length ? 'Adicionar outra lista' : 'Adicionar lista'
+          "
+        >
+        </scrumboard-board-add-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Invisible router-outlet for ScrumboardCard component -->
+<div class="absolute invisible w-0 h-0 opacity-0 pointer-events-none">
+  <router-outlet></router-outlet>
+</div>

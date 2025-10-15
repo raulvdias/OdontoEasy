@@ -1,0 +1,45 @@
+<div class="p-3 pt-0" [class.h-13]="!formVisible">
+  <div class="relative w-full h-full rounded-lg">
+    <button
+      class="absolute inset-0 flex items-center justify-center w-full rounded-lg"
+      [ngClass]="{ 'opacity-0 pointer-events-none': formVisible }"
+      mat-button
+      (click)="toggleFormVisibility()"
+    >
+      <mat-icon class="icon-size-5">add_circle</mat-icon>
+      <span class="ml-2 text-secondary">{{ buttonTitle }}</span>
+    </button>
+    <form
+      class="flex flex-col items-start w-full"
+      [ngClass]="{ 'opacity-0': !formVisible }"
+      [formGroup]="form"
+    >
+      <div class="flex w-full p-5 rounded-lg shadow bg-white">
+        <textarea
+          class="w-full text-sm font-medium p-2 focus:outline-none"
+          [spellcheck]="'off'"
+          [formControlName]="'title'"
+          [placeholder]="'Insira o título do card...'"
+          (keydown.enter)="save()"
+          cdkTextareaAutosize
+          rows="2"
+          #titleInput
+          #titleAutosize="cdkTextareaAutosize"
+        >
+        </textarea>
+      </div>
+      <div class="w-full grid grid-cols-2 place-items-center mt-3">
+        <button
+          class="p-2 rounded-md bg-blue-500 text-white cursor-pointer font-medium"
+          [type]="'button'"
+          (click)="save()"
+        >
+          Adicionar
+        </button>
+        <button class="cursor-pointer" (click)="toggleFormVisibility()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

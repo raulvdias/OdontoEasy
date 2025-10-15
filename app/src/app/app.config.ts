@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { environment } from './environment';
 import { provideHttpClient } from '@angular/common/http';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,5 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(),
     provideAuth(() => getAuth()),
+    provideNativeDateAdapter(),
   ],
 };

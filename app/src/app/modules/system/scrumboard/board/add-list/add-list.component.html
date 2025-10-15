@@ -1,0 +1,56 @@
+<div class="mt-13 w-64 py-2.5 px-2" [class.h-15]="!formVisible">
+  <div class="relative w-full h-full rounded-lg bg-slate-300">
+    <!-- Botão de adicionar lista -->
+    <button
+      class="absolute inset-0 flex items-center justify-center w-full rounded-lg"
+      [ngClass]="{
+        'opacity-0 pointer-events-none scale-95': formVisible,
+        'opacity-100 scale-100': !formVisible
+      }"
+      mat-button
+      (click)="toggleFormVisibility()"
+      disableRipple
+    >
+      <mat-icon class="icon-size-5">add_circle</mat-icon>
+      <span class="ml-2 text-secondary">{{ buttonTitle }}</span>
+    </button>
+
+    <!-- Formulário -->
+    <form
+      class="flex flex-col items-start w-full p-3 transition-all duration-200"
+      [ngClass]="{
+        'opacity-100 translate-y-0': formVisible,
+        'opacity-0 -translate-y-1 pointer-events-none': !formVisible
+      }"
+      [formGroup]="form"
+    >
+      <input
+        class="w-full py-2 px-3 leading-5 rounded-md shadow-sm border border-gray-300 bg-white outline-none"
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Insira o título da lista..."
+        (keydown.enter)="save()"
+        #titleInput
+      />
+
+      <div class="w-full grid grid-cols-2 place-items-center mt-3">
+        <button
+          class="p-2 rounded-md bg-blue-500 text-white cursor-pointer font-medium"
+          color="primary"
+          type="button"
+          (click)="save()"
+        >
+          Salvar
+        </button>
+        <button
+          class="ml-1 w-8 h-8 min-h-8"
+          mat-icon-button
+          type="button"
+          (click)="toggleFormVisibility()"
+        >
+          <mat-icon class="icon-size-4">close</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
