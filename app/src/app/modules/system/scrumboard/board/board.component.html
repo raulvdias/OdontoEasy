@@ -1,9 +1,7 @@
 <div class="inset-0 flex flex-col h-full">
-  <!-- Header -->
   <div
     class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b-2 border-b-gray-300"
   >
-    <!-- Title -->
     <div class="flex-1 min-w-0">
       <h2
         class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
@@ -11,7 +9,7 @@
         {{ board.title }}
       </h2>
     </div>
-    <!-- Actions -->
+
     <div class="font-medium flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
       <button
         mat-stroked-button
@@ -31,12 +29,10 @@
     </div>
   </div>
 
-  <!-- Main -->
   <div
     class="min-h-screen min-w-0 flex-auto p-6 sm:p-8 sm:pt-4 bg-slate-200 overflow-y-auto"
     cdkScrollable
   >
-    <!-- Lists wrapper -->
     <div
       class="flex flex-col sm:flex-row sm:gap-5 gap-4 min-h-[150px] sm:overflow-x-auto"
       cdkDropList
@@ -44,12 +40,10 @@
       [cdkDropListOrientation]="'horizontal'"
       (cdkDropListDropped)="listDropped($event)"
     >
-      <!-- Group all cdkDropList's after this point together so that the cards can be transferred between lists -->
       <div
         class="flex flex-col sm:flex-row sm:gap-5 gap-4 items-start"
         cdkDropListGroup
       >
-        <!-- List -->
         <ng-container *ngFor="let list of board.lists; trackBy: trackByFn">
           <div
             class="flex-0 w-full sm:w-64 md:w-72 min-w-[16rem] p-3 rounded-2xl"
