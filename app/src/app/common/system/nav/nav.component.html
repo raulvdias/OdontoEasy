@@ -7,7 +7,7 @@
     <button
       matButton
       [matMenuTriggerFor]="menu"
-      class="rounded-md cursor-pointer p-2 bg-gray-500 text-left"
+      class="rounded-md cursor-pointer p-2 bg-blue-600 text-left"
     >
       ⚡ Menu Rápido
     </button>
@@ -30,6 +30,16 @@
       routerLink="/dashboard/consultas"
       class="block p-2 rounded hover:bg-gray-400 dark:hover:bg-gray-700"
       >📅 Consultas</a
+    >
+    <a
+      routerLink="/system/dashboard"
+      class="block p-2 rounded hover:bg-gray-400 dark:hover:bg-gray-700"
+      >👥 Dashboard</a
+    >
+    <a
+      routerLink="/system/scrumboard"
+      class="block p-2 rounded hover:bg-gray-400 dark:hover:bg-gray-700"
+      >📋 Scrumboard</a
     >
     <a
       routerLink="/dashboard/financeiro"

@@ -2,7 +2,10 @@
   <div class="relative w-full h-full rounded-lg">
     <button
       class="absolute inset-0 flex items-center justify-center w-full rounded-lg"
-      [ngClass]="{ 'opacity-0 pointer-events-none': formVisible }"
+      [ngClass]="{
+        'opacity-100 scale-100': !formVisible,
+        '!hidden': formVisible
+      }"
       mat-button
       (click)="toggleFormVisibility()"
     >
@@ -28,16 +31,19 @@
         >
         </textarea>
       </div>
-      <div class="w-full grid grid-cols-2 place-items-center mt-3">
+
+      <div class="w-full flex justify-center gap-5 mt-3">
         <button
           class="p-2 rounded-md bg-blue-500 text-white cursor-pointer font-medium"
-          [type]="'button'"
           (click)="save()"
         >
           Adicionar
         </button>
-        <button class="cursor-pointer" (click)="toggleFormVisibility()">
-          <mat-icon>close</mat-icon>
+        <button
+          class="p-2 rounded-md bg-red-500 text-white cursor-pointer font-medium"
+          (click)="toggleFormVisibility()"
+        >
+          Cancelar
         </button>
       </div>
     </form>

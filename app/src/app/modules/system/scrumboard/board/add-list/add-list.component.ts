@@ -40,7 +40,7 @@ export class ScrumboardBoardAddListComponent implements OnInit {
   @Output() readonly saved: EventEmitter<string> = new EventEmitter<string>();
 
   form!: UntypedFormGroup;
-  formVisible: boolean = false;
+  formVisible = false;
 
   /**
    * Constructor
