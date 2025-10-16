@@ -28,6 +28,10 @@ import { ScrumboardBoardAddCardComponent } from './add-card/add-card.component';
 import { ScrumboardBoardAddListComponent } from './add-list/add-list.component';
 import { Board, Card, List } from '../scrumboard.models';
 import { ScrumboardService } from '../scrumboard.service';
+import {
+  fadeInOnEnterAnimation,
+  fadeOutOnLeaveAnimation,
+} from 'angular-animations';
 
 @Component({
   selector: 'scrumboard-board',
@@ -53,6 +57,10 @@ import { ScrumboardService } from '../scrumboard.service';
     ScrumboardBoardAddListComponent,
     RouterOutlet,
     DatePipe,
+  ],
+  animations: [
+    fadeInOnEnterAnimation({}),
+    fadeOutOnLeaveAnimation({ duration: 300 }),
   ],
 })
 export class ScrumboardBoardComponent implements OnInit, OnDestroy {

@@ -1,39 +1,47 @@
 <div class="min-h-screen flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
   <!-- Main -->
-  <div class="bg-slate-200 flex flex-col flex-auto items-center p-6 sm:p-10">
+  <div
+    class="bg-slate-200 flex flex-col flex-auto items-center p-4 sm:p-6 md:p-10"
+  >
     <!-- Title -->
     <div
-      class="mt-4 md:mt-24 text-3xl md:text-6xl font-extrabold tracking-tight leading-7 sm:leading-10"
+      class="mt-4 md:mt-16 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-snug sm:leading-tight text-center"
     >
       Scrumboard Boards
     </div>
 
-    <!-- Boards -->
+    <!-- Boards Grid -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 md:mt-16"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 sm:mt-8 md:mt-12 w-full justify-items-center"
     >
       <ng-container *ngFor="let board of boards; trackBy: trackByFn">
         <a
-          class="bg-white flex-col items-start w-64 p-6 rounded-lg shadow bg-card rounded-lg hover:shadow-xl transition-shadow duration-150 ease-in-out"
+          class="flex flex-col items-start w-full max-w-xs p-4 sm:p-6 rounded-lg shadow bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out"
           [routerLink]="[board.id]"
         >
+          <!-- Icon -->
           <div
-            class="w-15 flex justify-center rounded-full bg-blue-50 p-4 text-primary-700 dark:bg-blue-200 dark:text-on-primary"
+            class="w-12 h-12 flex justify-center items-center rounded-full bg-blue-50 text-blue-700 mb-4"
           >
-            <mat-icon class="text-current">cases</mat-icon>
+            <mat-icon class="text-current text-xl">cases</mat-icon>
           </div>
+
           <!-- Title -->
-          <div class="mt-5 text-lg font-medium leading-5">
+          <div class="text-lg font-medium leading-5 mb-1 truncate">
             {{ board.title }}
           </div>
+
           <!-- Description -->
-          <div class="mt-3 text-secondary text-gray-500">
+          <div
+            class="text-sm text-gray-500 mb-4 break-words overflow-hidden max-h-12"
+          >
             {{ board.description }}
           </div>
+
           <!-- Members -->
           <ng-container *ngIf="board.members?.length">
-            <div class="w-12 h-1 mt-6 border-t-2 border-gray-400"></div>
-            <div class="flex items-center mt-6 -space-x-1.5">
+            <div class="w-full h-px border-t border-gray-300 mb-3"></div>
+            <div class="flex -space-x-2">
               <ng-container
                 *ngFor="
                   let member of board.members.slice(0, 5);
@@ -41,34 +49,39 @@
                 "
               >
                 <img
-                  class="flex-0 w-8 h-8 rounded-full ring ring-offset-1 ring-bg-card ring-offset-transparent object-cover"
+                  class="w-8 h-8 rounded-full ring-1 ring-gray-200 object-cover"
                   [src]="member.avatar"
                   alt="Member avatar"
                 />
               </ng-container>
               <ng-container *ngIf="board.members.length > 5">
                 <div
-                  class="flex flex-0 items-center justify-center w-8 h-8 rounded-full ring ring-offset-1 ring-bg-card ring-offset-transparent bg-gray-200 text-gray-500"
+                  class="flex items-center justify-center w-8 h-8 rounded-full ring-1 ring-gray-200 bg-gray-200 text-gray-500 text-sm font-semibold"
                 >
-                  <div class="text-md font-semibold">
-                    +{{ board.members.slice(5).length }}
-                  </div>
+                  +{{ board.members.slice(5).length }}
                 </div>
               </ng-container>
             </div>
           </ng-container>
+
           <!-- Last activity -->
-          <div class="flex items-center mt-4 text-md font-md">
-            <div class="text-secondary text-gray-500">Editado:</div>
+          <div class="flex items-center mt-3 text-sm text-gray-500">
+            <div>Editado:</div>
             <div class="ml-1">1 dia atrás</div>
           </div>
         </a>
       </ng-container>
-      <!-- New board -->
+
+      <!-- New Board -->
       <div
-        class="flex flex-col items-center justify-center w-56 rounded-lg cursor-pointer border-2 border-gray-600 border-dashed hover:bg-hover transition-colors duration-150 ease-in-out"
+        class="flex flex-col items-center justify-center w-full max-w-xs p-4 sm:p-6 h-auto rounded-lg cursor-pointer border-2 border-gray-400 border-dashed bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out hover:bg-gray-100"
       >
-        <mat-icon class="icon-size-12 text-hint">add</mat-icon>
+        <mat-icon class="text-gray-500 text-xl sm:text-2xl md:text-3xl"
+          >add</mat-icon
+        >
+        <div class="mt-2 text-sm sm:text-base text-gray-500">
+          Adicionar Board
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,29 @@
+::ng-deep .mat-datepicker-content {
+  background-color: #e5e5e5 !important; /* bg-gray-300 */
+  color: #333 !important;
+  border-radius: 0.5rem; /* arredondado */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .mat-calendar {
+  background-color: #e5e5e5 !important; /* garante o mesmo fundo dentro */
+  border-radius: 0.5rem;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  border-radius: 9999px; /* círculos */
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #6b7280 !important; /* gray-500 */
+  color: white !important;
+}
+
+::ng-deep .mat-datepicker-actions {
+  background-color: #d1d5db; /* gray-300 */
+  border-top: 1px solid #9ca3af;
+}
+
+::ng-deep .mat-datepicker-actions button {
+  color: #374151 !important;
+}

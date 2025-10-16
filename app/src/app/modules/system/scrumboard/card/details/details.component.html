@@ -1,77 +1,69 @@
-<div
-  class="flex flex-col flex-auto md:w-160 md:min-w-160 max-h-160 -m-6 overflow-y-auto"
->
+<div class="flex flex-col flex-auto overflow-y-auto bg-white shadow-lg">
   <!-- Header -->
   <div
-    class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary"
+    class="flex flex-0 items-center justify-between h-16 px-6 bg-gray-300 transition-all duration-300"
   >
-    <div class="text-lg font-medium">Card</div>
-    <button mat-icon-button (click)="matDialogRef.close()" [tabIndex]="-1">
-      <mat-icon
-        class="text-current"
-        [svgIcon]="'heroicons_outline:x-mark'"
-      ></mat-icon>
+    <div class="text-lg font-semibold tracking-wide text-gray-700">Card</div>
+    <button
+      mat-icon-button
+      (click)="matDialogRef.close()"
+      class="hover:bg-gray-200 rounded-full transition-all duration-200"
+    >
+      <mat-icon class="text-gray-700">close</mat-icon>
     </button>
   </div>
 
-  <!-- Card form -->
+  <!-- Form -->
   <form
-    class="flex flex-col flex-0 items-start w-full p-6 sm:p-8 space-y-6 overflow-y-auto"
+    class="flex flex-col flex-0 items-start w-full p-6 space-y-6 overflow-y-auto"
     [formGroup]="cardForm"
   >
-    <!-- Title -->
-    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
-      <mat-label>Title</mat-label>
+    <!-- Título -->
+    <mat-form-field
+      class="w-full transition-all duration-200 focus-within:scale-[1.01]"
+      [subscriptSizing]="'dynamic'"
+    >
+      <mat-label>Título</mat-label>
       <textarea
         matInput
         [formControlName]="'title'"
         [rows]="1"
         cdkTextareaAutosize
         [cdkAutosizeMinRows]="1"
-      >
-      </textarea>
+      ></textarea>
     </mat-form-field>
 
-    <!-- Description -->
-    <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
-      <mat-label>Description</mat-label>
+    <!-- Descrição -->
+    <mat-form-field
+      class="w-full transition-all duration-200 focus-within:scale-[1.01]"
+      [subscriptSizing]="'dynamic'"
+    >
+      <mat-label>Descrição</mat-label>
       <textarea
         matInput
         [formControlName]="'description'"
         [rows]="1"
         cdkTextareaAutosize
         [cdkAutosizeMinRows]="1"
-      >
-      </textarea>
+      ></textarea>
     </mat-form-field>
 
-    <!-- Due date -->
-    <div>
-      <div class="font-medium">Due date</div>
+    <!-- Data -->
+    <div class="w-full">
+      <div class="font-medium text-gray-700">Data</div>
       <div
-        class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer"
-        [ngClass]="{
-          'text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700':
-            !card.dueDate,
-          'text-green-800 bg-green-200 dark:text-green-100 dark:bg-green-500':
-            card.dueDate && !isOverdue(card.dueDate),
-          'text-red-800 bg-red-200 dark:text-red-100 dark:bg-red-500':
-            card.dueDate && isOverdue(card.dueDate)
-        }"
+        class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer transition-all duration-200 bg-gray-300 hover:bg-gray-200"
         (click)="dueDatePicker.open()"
       >
-        <mat-icon
-          class="icon-size-5 text-current"
-          [svgIcon]="'heroicons_solid:calendar'"
-        ></mat-icon>
-        <span class="ml-2 text-md font-medium">
+        <mat-icon class="icon-size-5 text-gray-600">calendar_month</mat-icon>
+        <span class="ml-2 text-md font-medium text-gray-700">
           <ng-container *ngIf="card.dueDate">{{
-            card.dueDate | date : "longDate"
+            card.dueDate | date : "dd/MM/yyyy"
           }}</ng-container>
-          <ng-container *ngIf="!card.dueDate">Not set</ng-container>
+          <ng-container *ngIf="!card.dueDate">Não definido</ng-container>
         </span>
         <mat-form-field
-          class="fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none"
+          class="absolute inset-0 -mt-2.5 opacity-0 pointer-events-none"
           [subscriptSizing]="'dynamic'"
         >
           <input
@@ -86,10 +78,10 @@
                 (click)="cardForm.get('dueDate')?.setValue(null)"
                 matDatepickerCancel
               >
-                Clear
+                Limpar
               </button>
               <button mat-flat-button [color]="'primary'" matDatepickerApply>
-                Select
+                Selecionar
               </button>
             </mat-datepicker-actions>
           </mat-datepicker>
@@ -97,37 +89,31 @@
       </div>
     </div>
 
-    <!-- Labels -->
     <div class="w-full">
-      <div class="font-medium">Labels</div>
+      <div class="font-medium text-gray-700">Tags</div>
       <div
-        class="mt-1 rounded-md border border-gray-300 shadow-sm overflow-hidden"
+        class="mt-1 rounded-md border border-gray-300 shadow-sm bg-gray-300 transition-all duration-200"
       >
-        <!-- Header -->
         <div class="flex items-center my-2 mx-3">
-          <div class="flex items-center flex-auto min-w-0">
-            <mat-icon
-              class="icon-size-5"
-              [svgIcon]="'heroicons_solid:magnifying-glass'"
-            ></mat-icon>
-            <input
-              class="min-w-0 ml-2 py-1 border-0"
-              type="text"
-              placeholder="Enter label name"
-              (input)="filterLabels($event)"
-              (keydown)="filterLabelsInputKeyDown($event)"
-              [maxLength]="50"
-            />
-          </div>
+          <mat-icon class="text-gray-600">search</mat-icon>
+          <input
+            class="min-w-0 ml-2 py-1 border-0 bg-transparent text-gray-700 placeholder-gray-600 focus:outline-none"
+            type="text"
+            placeholder="Procurar label..."
+            (input)="filterLabels($event)"
+            (keydown)="filterLabelsInputKeyDown($event)"
+            [maxLength]="50"
+          />
         </div>
-        <!-- Available labels -->
-        <div class="max-h-40 leading-none overflow-y-auto border-t">
-          <!-- Labels -->
+
+        <div
+          class="leading-none border-t border-gray-400 grid grid-cols-1 md:grid-cols-3 place-items-center w-full"
+        >
           <ng-container
             *ngFor="let label of filteredLabels; trackBy: trackByFn"
           >
             <mat-checkbox
-              class="flex items-center h-10 min-h-10 pl-1 pr-4"
+              class="p-2 w-full hover:bg-gray-200 transition-all duration-200"
               [color]="'primary'"
               [checked]="hasLabel(label)"
               (change)="toggleProductTag(label, $event)"

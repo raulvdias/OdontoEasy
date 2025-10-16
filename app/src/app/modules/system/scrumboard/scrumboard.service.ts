@@ -100,6 +100,16 @@ export class ScrumboardService {
           boardId: 'board-1',
           title: 'Melhoria',
         },
+        {
+          id: 'lbl-4',
+          boardId: 'board-1',
+          title: 'Baixa prioridade',
+        },
+        {
+          id: 'lbl-5',
+          boardId: 'board-1',
+          title: 'Média prioridade',
+        },
       ],
 
       // Listas (colunas do board)
@@ -288,6 +298,16 @@ export class ScrumboardService {
           id: 'lbl-3',
           boardId: 'board-1',
           title: 'Melhoria',
+        },
+        {
+          id: 'lbl-4',
+          boardId: 'board-1',
+          title: 'Baixa prioridade',
+        },
+        {
+          id: 'lbl-5',
+          boardId: 'board-1',
+          title: 'Média prioridade',
         },
       ],
 
