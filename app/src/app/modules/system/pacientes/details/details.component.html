@@ -1,0 +1,141 @@
+<div class="min-h-screen pt-10 px-5 bg-gray-100 dark:bg-slate-200">
+  <!-- Header -->
+  <section
+    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10"
+  >
+    <div>
+      <h1 class="font-bold text-4xl text-blue-400 mb-1">
+        Detalhes do Paciente
+      </h1>
+      <span class="text-gray-600">Informações e histórico clínico</span>
+    </div>
+
+    <div class="flex items-center gap-3 mt-4 sm:mt-0">
+      <button
+        class="bg-gray-200 p-2 cursor-pointer text-gray-800 hover:bg-gray-300 rounded-md flex items-center gap-1"
+        routerLink="/system/pacientes"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+
+      <button
+        class="bg-blue-500 p-2 cursor-pointer text-white hover:bg-blue-600 rounded-md flex items-center gap-1"
+        (click)="editarPaciente()"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+
+      <button
+        class="bg-red-500 p-2 cursor-pointer text-white hover:bg-red-600 rounded-md flex items-center gap-1"
+        (click)="excluirPaciente()"
+      >
+        <mat-icon>delete</mat-icon>
+        Excluir
+      </button>
+    </div>
+  </section>
+
+  <!-- Dados principais -->
+  <section class="bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-8">
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+      <img
+        [src]="paciente.foto"
+        alt="Foto do paciente"
+        class="w-32 h-32 rounded-full object-cover border-4 border-blue-300 shadow"
+      />
+
+      <div class="flex-1 text-center sm:text-left">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">
+          {{ paciente.nome }}
+        </h2>
+        <p class="text-gray-500 text-sm mb-1">
+          <mat-icon class="text-blue-500 align-middle">email</mat-icon>
+          {{ paciente.email }}
+        </p>
+        <p class="text-gray-500 text-sm mb-1">
+          <mat-icon class="text-blue-500 align-middle">today</mat-icon>
+          Cadastrado em {{ paciente.dataCadastro | date : "dd/MM/yyyy" }}
+        </p>
+        <p class="text-gray-500 text-sm mb-1">
+          <mat-icon class="text-blue-500 align-middle">call</mat-icon>
+          {{ paciente.telefone }}
+        </p>
+        <p class="text-gray-500 text-sm">
+          <mat-icon class="text-blue-500 align-middle">home</mat-icon>
+          {{ paciente.endereco }}
+        </p>
+      </div>
+    </div>
+
+    <hr class="my-6 border-gray-200" />
+
+    <!-- Dados Clínicos -->
+    <div>
+      <h3 class="font-semibold text-gray-700 mb-2">Dados Clínicos</h3>
+      <div class="grid sm:grid-cols-2 gap-4 text-gray-600 text-sm">
+        <p>
+          <mat-icon class="text-blue-400 align-middle">healing</mat-icon>
+          Condição principal: {{ paciente.condicao }}
+        </p>
+        <p>
+          <mat-icon class="text-blue-400 align-middle">science</mat-icon>
+          Plano odontológico: {{ paciente.plano }}
+        </p>
+        <p>
+          <mat-icon class="text-blue-400 align-middle">bloodtype</mat-icon>
+          Tipo sanguíneo: {{ paciente.tipoSanguineo }}
+        </p>
+        <p>
+          <mat-icon class="text-blue-400 align-middle">calendar_month</mat-icon>
+          Última consulta: {{ paciente.ultimaConsulta | date : "dd/MM/yyyy" }}
+        </p>
+      </div>
+    </div>
+
+    <hr class="my-6 border-gray-200" />
+
+    <!-- Prontuário -->
+    <div>
+      <h3 class="font-semibold text-gray-700 mb-4">Prontuário</h3>
+
+      <div
+        *ngIf="paciente.consultas?.length; else semConsultas"
+        class="overflow-x-auto"
+      >
+        <table
+          class="min-w-full border border-gray-200 text-sm text-gray-700 rounded-lg"
+        >
+          <thead class="bg-gray-200 text-gray-800">
+            <tr>
+              <th class="py-3 px-4 text-left">Data</th>
+              <th class="py-3 px-4 text-left">Dentista</th>
+              <th class="py-3 px-4 text-left">Procedimento</th>
+              <th class="py-3 px-4 text-left">Observações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let consulta of paciente.consultas"
+              class="border-t hover:bg-gray-50 transition"
+            >
+              <td class="py-3 px-4">
+                {{ consulta.data | date : "dd/MM/yyyy" }}
+              </td>
+              <td class="py-3 px-4">{{ consulta.dentista }}</td>
+              <td class="py-3 px-4">{{ consulta.procedimento }}</td>
+              <td class="py-3 px-4">{{ consulta.observacoes }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #semConsultas>
+        <div class="text-center text-gray-500 py-6">
+          Nenhuma consulta registrada para este paciente.
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,133 @@
+<div class="min-h-screen pt-10 px-5 bg-gray-100 dark:bg-slate-200">
+  <section>
+    <h1 class="font-bold text-4xl text-blue-400 mb-2">Pacientes</h1>
+    <span>Total de pacientes cadastrados: {{ pacientes.length }}</span>
+  </section>
+
+  <section
+    class="w-full grid grid-cols-1 sm:grid-cols-3 mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+  >
+    <mat-form-field
+      subscriptSizing="dynamic"
+      class="col-span-1 sm:col-span-2 flex-1 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+      appearance="fill"
+    >
+      <mat-icon matPrefix class="text-gray-500">search</mat-icon>
+      <input
+        matInput
+        placeholder="Buscar paciente por nome ou e-mail..."
+        [formControl]="searchControl"
+      />
+    </mat-form-field>
+
+    <button
+      class="col-span-1 bg-blue-500 text-white font-semibold rounded-md px-6 py-3 flex gap-2 justify-center cursor-pointer hover:scale-105 hover:shadow-md transition-all"
+      (click)="adicionarPaciente()"
+    >
+      <mat-icon class="mr-1">person_add</mat-icon>
+      Adicionar Paciente
+    </button>
+  </section>
+
+  <section *ngIf="!isMobile" class="mt-10">
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+      <table
+        mat-table
+        [dataSource]="filteredPacientes"
+        class="w-full mat-elevation-z1"
+      >
+        <ng-container matColumnDef="foto">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let paciente">
+            <img
+              [src]="paciente.foto"
+              alt="Foto do paciente"
+              class="w-10 h-10 rounded-full object-cover border border-gray-300"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let paciente" class="font-bold">
+            {{ paciente.nome }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>E-mail</th>
+          <td mat-cell *matCellDef="let paciente">{{ paciente.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataCadastro">
+          <th mat-header-cell *matHeaderCellDef>Data de cadastro</th>
+          <td mat-cell *matCellDef="let paciente">
+            {{ paciente.dataCadastro | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef class="text-center">Perfil</th>
+          <td mat-cell *matCellDef="let paciente" class="text-center">
+            <button
+              mat-raised-button
+              class="!w-40 !p-2 !bg-blue-400 !font-medium !rounded-md !cursor-pointer hover:scale-105 transition"
+              (click)="abrirProntuario(paciente)"
+            >
+              Prontuário
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="hover:bg-gray-50 transition"
+        ></tr>
+      </table>
+
+      <div
+        *ngIf="filteredPacientes.length === 0"
+        class="text-center text-gray-500 py-8"
+      >
+        Nenhum paciente encontrado.
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="isMobile" class="mt-10">
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+      <div
+        *ngFor="let paciente of filteredPacientes"
+        class="flex flex-col items-center px-6 py-4 border-b hover:bg-gray-50 transition text-center"
+      >
+        <img
+          [src]="paciente.foto"
+          alt="Foto do paciente"
+          class="w-16 h-16 rounded-full object-cover border border-gray-300 mb-2"
+        />
+        <span class="font-semibold text-gray-800">{{ paciente.nome }}</span>
+        <span class="text-sm text-gray-500">{{ paciente.email }}</span>
+        <span class="text-xs text-gray-400 mt-1">
+          Cadastrado em {{ paciente.dataCadastro | date : "dd/MM/yyyy" }}
+        </span>
+
+        <button
+          mat-raised-button
+          class="mt-3 !w-40 !p-2 !bg-blue-400 !text-white !font-bold !rounded-md hover:scale-105 transition"
+          (click)="abrirProntuario(paciente)"
+        >
+          Prontuário
+        </button>
+      </div>
+
+      <div
+        *ngIf="filteredPacientes.length === 0"
+        class="text-center text-gray-500 py-8"
+      >
+        Nenhum paciente encontrado.
+      </div>
+    </div>
+  </section>
+</div>

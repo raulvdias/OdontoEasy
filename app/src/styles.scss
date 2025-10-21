@@ -26,3 +26,8 @@ body {
   margin: 0 !important;
   overflow: hidden !important;
 }
+
+//No ripple mat-form-field
+div[matformfieldlineripple] {
+  display: none;
+}

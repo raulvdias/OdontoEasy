@@ -162,7 +162,7 @@ export class ScrumboardService {
           id: 'list-2',
           boardId: 'board-1',
           position: 2,
-          title: 'Em Andamento',
+          title: 'Andamento',
           cards: [
             {
               id: 'card-3',

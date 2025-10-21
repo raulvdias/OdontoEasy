@@ -1,0 +1,149 @@
+<div class="min-h-screen pt-10 px-5 bg-gray-100">
+  <section>
+    <h1 class="font-bold text-4xl text-green-500 mb-2 flex items-center gap-2">
+      <mat-icon class="text-green-600">badge</mat-icon>
+      Funcionários
+    </h1>
+    <span>Total de funcionários cadastrados: {{ funcionarios.length }}</span>
+  </section>
+
+  <section
+    class="grid grid-cols-1 sm:grid-cols-3 mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+  >
+    <mat-form-field
+      subscriptSizing="dynamic"
+      class="col-span-1 sm:col-span-2 flex-1 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+      appearance="fill"
+    >
+      <mat-icon matPrefix class="text-gray-500">search</mat-icon>
+      <input
+        matInput
+        placeholder="Buscar funcionário por nome ou e-mail..."
+        [formControl]="searchControl"
+      />
+    </mat-form-field>
+
+    <button
+      class="col-span-1 bg-green-500 text-white font-semibold rounded-md px-4 py-3 flex justify-center cursor-pointer hover:scale-105 hover:shadow-md transition-all"
+      (click)="adicionarFuncionario()"
+    >
+      <mat-icon class="mr-1">person_add_alt</mat-icon>
+      Adicionar Funcionário
+    </button>
+  </section>
+
+  <section *ngIf="!isMobile" class="mt-10">
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+      <table
+        mat-table
+        [dataSource]="filteredFuncionarios"
+        class="w-full mat-elevation-z1"
+      >
+        <ng-container matColumnDef="foto">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let funcionario">
+            <img
+              [src]="funcionario.foto"
+              alt="Foto do funcionário"
+              class="w-10 h-10 rounded-full object-cover border border-gray-300"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let funcionario" class="font-bold">
+            {{ funcionario.nome }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>E-mail</th>
+          <td mat-cell *matCellDef="let funcionario">
+            {{ funcionario.email }}
+          </td>
+        </ng-container>
+
+        <!-- Cargo -->
+        <ng-container matColumnDef="cargo">
+          <th mat-header-cell *matHeaderCellDef>Cargo</th>
+          <td mat-cell *matCellDef="let funcionario">
+            {{ funcionario.cargo }}
+          </td>
+        </ng-container>
+
+        <!-- Data de admissão -->
+        <ng-container matColumnDef="dataAdmissao">
+          <th mat-header-cell *matHeaderCellDef>Data de admissão</th>
+          <td mat-cell *matCellDef="let funcionario">
+            {{ funcionario.dataAdmissao | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+
+        <!-- Ações -->
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef class="text-center">Perfil</th>
+          <td mat-cell *matCellDef="let funcionario" class="text-center">
+            <button
+              mat-raised-button
+              class="!w-40 !p-2 !bg-green-500 !font-medium !rounded-md !cursor-pointer hover:scale-105 transition"
+              (click)="abrirPerfil(funcionario)"
+            >
+              Ver Perfil
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="hover:bg-gray-50 transition"
+        ></tr>
+      </table>
+
+      <div
+        *ngIf="filteredFuncionarios.length === 0"
+        class="text-center text-gray-500 py-8"
+      >
+        Nenhum funcionário encontrado.
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="isMobile" class="mt-10">
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+      <div
+        *ngFor="let funcionario of filteredFuncionarios"
+        class="flex flex-col items-center px-6 py-4 border-b hover:bg-gray-50 transition text-center"
+      >
+        <img
+          [src]="funcionario.foto"
+          alt="Foto do funcionário"
+          class="w-16 h-16 rounded-full object-cover border border-gray-300 mb-2"
+        />
+        <span class="font-semibold text-gray-800">{{ funcionario.nome }}</span>
+        <span class="text-sm text-gray-500">{{ funcionario.email }}</span>
+        <span class="text-xs text-gray-400 mt-1">
+          {{ funcionario.cargo }} — Admissão:
+          {{ funcionario.dataAdmissao | date : "dd/MM/yyyy" }}
+        </span>
+
+        <button
+          mat-raised-button
+          class="mt-3 !w-40 !p-2 !bg-green-500 !text-white !font-bold !rounded-md hover:scale-105 transition"
+          (click)="abrirPerfil(funcionario)"
+        >
+          Ver Perfil
+        </button>
+      </div>
+
+      <div
+        *ngIf="filteredFuncionarios.length === 0"
+        class="text-center text-gray-500 py-8"
+      >
+        Nenhum funcionário encontrado.
+      </div>
+    </div>
+  </section>
+</div>
