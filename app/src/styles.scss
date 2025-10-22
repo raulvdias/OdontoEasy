@@ -28,6 +28,16 @@ body {
 }
 
 //No ripple mat-form-field
-div[matformfieldlineripple] {
-  display: none;
+// div[matformfieldlineripple] {
+//   display: none;
+// }
+
+//MatTooltip
+:root {
+  @include mat.tooltip-overrides(
+    (
+      container-color: rgb(226, 226, 226),
+      container-shape: 8px,
+    )
+  );
 }

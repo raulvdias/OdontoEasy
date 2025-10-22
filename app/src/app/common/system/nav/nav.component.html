@@ -15,10 +15,14 @@
       #menu="matMenu"
       class="!text-black dark:!text-white !bg-white dark:!bg-gray-800 !rounded-md"
     >
-      <button mat-menu-item>➕ Adicionar Cliente</button>
+      <button mat-menu-item routerLink="/system/pacientes/new">
+        ➕ Adicionar Paciente
+      </button>
       <button mat-menu-item>📅 Consultar Agenda</button>
       <button mat-menu-item>📦 Adicionar Estoque</button>
-      <button mat-menu-item>🦷 Adicionar Dentista</button>
+      <button mat-menu-item routerLink="/system/funcionarios/new">
+        🦷 Adicionar Dentista
+      </button>
     </mat-menu>
     <a
       routerLink="/system/dashboard"

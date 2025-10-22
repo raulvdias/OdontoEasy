@@ -1,0 +1,242 @@
+<div class="min-h-screen pt-10 px-5 bg-gray-100 flex justify-center">
+  <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-3xl">
+    <h1 class="font-bold text-3xl text-blue-500 mb-6 text-center">
+      Cadastro de Paciente
+    </h1>
+
+    <div class="flex flex-col items-center mb-6">
+      <div class="relative w-32 h-32">
+        <img
+          [src]="
+            fotoPreview ||
+            'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+          "
+          alt="Foto do paciente"
+          class="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow"
+        />
+
+        <div class="flex justify-center gap-1 mt-2">
+          <label
+            [matTooltip]="'Selecionar foto'"
+            class="text-white bg-blue-500 p-1 rounded-md cursor-pointer relative"
+          >
+            <mat-icon>add_a_photo</mat-icon>
+            <input
+              class="hidden"
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              hidden
+            />
+          </label>
+          <button
+            [matTooltip]="'Tirar foto'"
+            matIconButton
+            (click)="abrirCamera()"
+            class="text-white bg-green-500 cursor-pointer p-1 rounded-md"
+          >
+            <mat-icon>add_a_photo</mat-icon>
+          </button>
+        </div>
+      </div>
+      <span class="mt-15 text-sm text-gray-600">
+        Clique no ícone
+        <span class="text-blue-500">Azul</span>
+        para escolher ou
+        <span class="text-green-500">Verde</span>
+        tirar uma foto
+      </span>
+    </div>
+
+    <div *ngIf="cameraAtiva" class="flex flex-col items-center mb-6">
+      <video
+        #video
+        autoplay
+        class="rounded-lg border border-gray-400 shadow w-64 h-48"
+      ></video>
+
+      <div class="flex gap-4 mt-4">
+        <button
+          type="button"
+          class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition"
+          (click)="tirarFoto()"
+        >
+          Capturar
+        </button>
+        <button
+          type="button"
+          class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition"
+          (click)="fecharCamera()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <form
+      [formGroup]="pacienteForm"
+      (ngSubmit)="salvar()"
+      class="flex flex-col gap-4"
+    >
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>Nome completo</mat-label>
+        <input matInput formControlName="nome" />
+        <mat-error
+          class="mt-2"
+          *ngIf="
+            pacienteForm.get('nome')?.invalid &&
+            pacienteForm.get('nome')?.touched
+          "
+        >
+          Nome é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('email')?.hasError('required')"
+        >
+          E-mail é obrigatório.
+        </mat-error>
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('email')?.hasError('email')"
+        >
+          E-mail inválido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>Telefone</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          placeholder="Somente números"
+          [mask]="'(00) 00000-0000'"
+        />
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('phone')?.hasError('required')"
+        >
+          Telefone é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          formControlName="cpf"
+          placeholder="Somente números"
+          [mask]="'000.000.000-00'"
+        />
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('cpf')?.hasError('required')"
+        >
+          CPF é obrigatório.
+        </mat-error>
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('cpf')?.hasError('cpfInvalido')"
+        >
+          CPF inválido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>CEP</mat-label>
+        <input
+          (change)="viacep()"
+          matInput
+          [mask]="'00.000-000'"
+          formControlName="cep"
+          placeholder="Somente números"
+        />
+        <mat-error
+          class="mt-2"
+          *ngIf="pacienteForm.get('cep')?.hasError('required')"
+        >
+          CEP é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <div
+        *ngIf="pacienteForm.value.rua"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2"
+      >
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Rua</mat-label>
+          <input matInput formControlName="rua" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Bairro</mat-label>
+          <input matInput formControlName="bairro" readonly />
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="pacienteForm.value.cidade"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2"
+      >
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="estado" readonly />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>Plano Odontológico</mat-label>
+        <input matInput formControlName="planoOdonto" />
+        <mat-error
+          class="mt-2"
+          *ngIf="
+            pacienteForm.get('planoOdonto')?.invalid &&
+            pacienteForm.get('planoOdonto')?.touched
+          "
+        >
+          Endereço é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" subscriptSizing="dynamic">
+        <mat-label>Data de Cadastro</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dataCadastro"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="flex flex-wrap justify-center sm:justify-end gap-4 mt-8">
+        <button
+          type="button"
+          class="bg-gray-300 p-2 cursor-pointer text-gray-800 hover:bg-gray-400 rounded-md flex items-center gap-1"
+          (click)="cancelar()"
+        >
+          <mat-icon>arrow_back</mat-icon>
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="bg-blue-500 p-2 cursor-pointer text-white hover:bg-blue-600 rounded-md flex items-center gap-1"
+        >
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

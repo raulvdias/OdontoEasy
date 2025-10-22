@@ -5,10 +5,11 @@ import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-details',
-  imports: [DatePipe, MatIconModule, NgFor, NgIf, RouterLink],
+  imports: [DatePipe, MatIconModule, NgFor, NgIf, RouterLink, MatTooltipModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })

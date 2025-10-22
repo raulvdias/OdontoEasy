@@ -91,4 +91,8 @@ export class PacientesService {
     this._paciente.next(paciente);
     return this._paciente;
   }
+
+  cepService(cep: string): Observable<any> {
+    return this._httpClient.get(`https://viacep.com.br/ws/${cep}/json/`);
+  }
 }

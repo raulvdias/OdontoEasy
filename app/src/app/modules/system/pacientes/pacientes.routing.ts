@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component';
 import { inject } from '@angular/core';
 import { PacientesService } from './pacientes.service';
 import { catchError, throwError } from 'rxjs';
+import { NewComponent } from './new/new.component';
 
 const pacienteResolver = (
   route: ActivatedRouteSnapshot,
@@ -48,6 +49,10 @@ export default [
         resolve: {
           pacienteResolver,
         },
+      },
+      {
+        path: 'new',
+        component: NewComponent,
       },
     ],
   },

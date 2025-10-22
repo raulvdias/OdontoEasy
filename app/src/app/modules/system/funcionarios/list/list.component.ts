@@ -101,7 +101,7 @@ export class ListComponent {
   }
 
   adicionarFuncionario() {
-    console.log('Abrir formulário de novo funcionário');
+    this._router.navigateByUrl('/system/funcionarios/new');
   }
 
   abrirPerfil(funcionario: any) {

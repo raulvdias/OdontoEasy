@@ -129,14 +129,7 @@ export class ListComponent implements OnInit {
   }
 
   adicionarPaciente() {
-    // Aqui você pode redirecionar para um formulário, abrir modal, etc.
-    console.log('Abrir formulário de novo paciente');
-
-    // Exemplo: abrir modal (se usar Angular Material Dialog)
-    // this.dialog.open(PacienteFormDialogComponent, { width: '500px' });
-
-    // Ou redirecionar
-    // this.router.navigate(['/dashboard/pacientes/novo']);
+    this._router.navigate(['/system/pacientes/new']);
   }
 
   initFilterUsers() {

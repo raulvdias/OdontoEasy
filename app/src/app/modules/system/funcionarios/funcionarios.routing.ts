@@ -10,6 +10,7 @@ import { DetailsComponent } from './details/details.component';
 import { FuncionariosService } from './funcionarios.service';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { NewComponent } from './new/new.component';
 
 const funcionarioResolver = (
   route: ActivatedRouteSnapshot,
@@ -48,6 +49,10 @@ export default [
         resolve: {
           funcionarioResolver,
         },
+      },
+      {
+        path: 'new',
+        component: NewComponent,
       },
     ],
   },

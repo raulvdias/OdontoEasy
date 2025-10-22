@@ -12,6 +12,7 @@ import {
   MatDateFormats,
   provideNativeDateAdapter,
 } from '@angular/material/core';
+import { provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
 
 export const PT_BR_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -36,5 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MAT_DATE_FORMATS, useValue: PT_BR_DATE_FORMATS },
+    provideEnvironmentNgxMask(),
+    provideNgxMask(),
   ],
 };
