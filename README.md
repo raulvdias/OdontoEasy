@@ -1,10 +1,10 @@
 # OdontoEasy
 
-🦷 DentalCare – Sistema para Clínicas Odontológicas
+🦷 – Sistema para Clínicas Odontológicas
 
 📋 Descrição
 
-O DentalCare é um sistema completo para gestão de clínicas odontológicas, projetado para facilitar o gerenciamento de pacientes, agenda, tratamentos, pagamentos e relatórios.
+O OdontoEasy é um sistema completo para gestão de clínicas odontológicas, projetado para facilitar o gerenciamento de pacientes, agenda, tratamentos, pagamentos e relatórios.
 O objetivo é oferecer uma solução moderna, responsiva e segura para clínicas que buscam otimizar seus processos.
 
 🚀 Tecnologias Utilizadas
